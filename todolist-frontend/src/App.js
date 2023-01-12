@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from './components/Header';
 import Task from './components/Task';
+import TaskList from './components/TaskList';
 
 class App extends React.Component {
   render() {
@@ -9,7 +10,7 @@ class App extends React.Component {
       <div className='app'>
         <Header/>
         <main>
-          <Task/>
+          <TaskList/>
         </main>
       </div>
     )
