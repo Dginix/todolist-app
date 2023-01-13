@@ -1,10 +1,12 @@
 import React from "react"
 import { VscClose, VscEdit, VscRemove, VscCheck } from "react-icons/vsc";
 
-const Task = ({data, deleteTask}) => {
+const Task = ({data, deleteTask, checkTask}) => {
     return (
         <div className="task">
-            <div className="taskTitle">{data.title}</div>
+            <div className="taskTitle" style={{ textDecoration: data.isDone ? 'line-through' : 'none'}} >
+                {data.title}
+            </div>
             <div className="editTaskIconWrapper">
                 <VscEdit className="editTaskIcon" />
             </div>
@@ -13,11 +15,13 @@ const Task = ({data, deleteTask}) => {
             </div>
             <div className="checkTaskIconWrapper">
                 {data.isDone 
-                    ? <VscRemove className="checkTaskIcon"/>
-                    : <VscCheck className="checkTaskIcon"/>
+                    ? <VscRemove className="checkTaskIcon" onClick={() => checkTask(data.id)}/>
+                    : <VscCheck className="checkTaskIcon" onClick={() => checkTask(data.id)}/>
                 }
             </div>
-            <div className="taskDescription">{data.description}</div>
+            <div className="taskDescription" style={{ textDecoration: data.isDone ? 'line-through' : 'none'}} >
+                {data.description}
+            </div>
         </div>
     )
 }
