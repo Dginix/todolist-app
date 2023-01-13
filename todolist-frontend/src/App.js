@@ -3,15 +3,15 @@ import React from 'react';
 import Header from './components/Header';
 import TaskList from './components/TaskList';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className='app'>
-        <Header/>
-        <TaskList/>
-      </div>
-    )
-  }
+function App() {
+  return (
+    <div className='App'>
+      <Header />
+      <main>
+        <TaskList />
+      </main>
+    </div>
+  )
 }
 
 
