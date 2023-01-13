@@ -72,14 +72,14 @@ main {
     width: 450px;
 
     display: grid; 
-    grid-template-columns: 14fr 1fr 1fr; 
+    grid-template-columns: 13fr 1fr 1fr 1fr; 
     grid-template-rows: auto auto; 
     grid-template-areas: 
-      "title edit delete"
-      "description description description"; 
+      "title check edit delete"
+      "description description description description"; 
 }
 
-.deleteTaskIconWrapper{
+.deleteTaskIconWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,12 +89,22 @@ main {
     margin: 2px;
 }
 
-.editTaskIconWrapper{
+.editTaskIconWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
 
     grid-area: edit;
+
+    margin: 2px;
+}
+
+.checkTaskIconWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    grid-area: check;
 
     margin: 2px;
 }
@@ -130,8 +140,18 @@ main {
 
 .deleteTaskIcon {
     transform: scale(1.5);
+    background-color: #e81123ce;
+    border-radius: 5px;    
 }
 
 .deleteTaskIcon:hover {
+    opacity: 0.5;
+}
+
+.checkTaskIcon {
+    transform: scale(1.5);
+}
+
+.checkTaskIcon:hover {
     opacity: 0.5;
 }

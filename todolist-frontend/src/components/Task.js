@@ -1,5 +1,5 @@
 import React from "react"
-import { VscClose, VscEdit } from "react-icons/vsc";
+import { VscClose, VscEdit, VscRemove, VscCheck } from "react-icons/vsc";
 
 const Task = ({data, deleteTask}) => {
     return (
@@ -10,6 +10,12 @@ const Task = ({data, deleteTask}) => {
             </div>
             <div className="deleteTaskIconWrapper">
                 <VscClose className="deleteTaskIcon" onClick={() => deleteTask(data.id)} />
+            </div>
+            <div className="checkTaskIconWrapper">
+                {data.isDone 
+                    ? <VscRemove className="checkTaskIcon"/>
+                    : <VscCheck className="checkTaskIcon"/>
+                }
             </div>
             <div className="taskDescription">{data.description}</div>
         </div>
