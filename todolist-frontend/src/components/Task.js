@@ -8,10 +8,10 @@ class Task extends React.Component {
             <div className="task">
                 <div className="taskTitle">{this.props.task.title}</div>
                 <div className="editTaskIconWrapper">
-                    <VscEdit/>
+                    <VscEdit className="editTaskIcon"/>
                 </div>
                 <div className="deleteTaskIconWrapper">
-                    <VscClose/>
+                    <VscClose className="deleteTaskIcon"/>
                 </div>
                 <div className="taskDescription">{this.props.task.description}</div>
             </div>
