@@ -8,11 +8,20 @@ const AddTask = ({task, setTask}) => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [newTask, setNewTask] = useState({})
+    const [errorText, setErrorText] = useState('');
 
     const clickHandler = event => {
         event.preventDefault();
-        setTask([...task, newTask])
-        event.target.reset();
+
+        if(title === '' || description === '') {
+            setErrorText("fileds cannot be empty")
+        }
+        else {
+            setTask([...task, newTask])
+            event.target.reset();
+            setErrorText('')    
+        }
+
     }
 
     useEffect(() => {   
@@ -33,6 +42,7 @@ const AddTask = ({task, setTask}) => {
             <form className="addTaskForm" onSubmit={clickHandler}>
                 <input type='text' placeholder="Title" onChange = { (e)=>setTitle(e.target.value) }/>
                 <input type='text' placeholder="Descriptrion" onChange = { (e)=>setDescription(e.target.value) }/>
+                <span className="errorTextField">{errorText}</span>
                 <button type="submit">
                     <TfiWrite/>
                     Add task

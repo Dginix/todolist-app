@@ -203,3 +203,8 @@ main {
     align-items: center;
     gap: 5px;
 }
+
+.addTaskForm .errorTextField {
+    color: #ff6969;
+    font-weight: 100;
+}
