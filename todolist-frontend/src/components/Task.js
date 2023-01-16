@@ -5,7 +5,7 @@ const Task = ({data, deleteTask, checkTask}) => {
     return (
         <div className="task">
             <div className="taskTitle" style={{ textDecoration: data.isDone ? 'line-through' : 'none'}} >
-                {data.title}
+                id:{data.id}<br/>{data.title}
             </div>
             <div className="editTaskIconWrapper">
                 <VscEdit className="editTaskIcon" />

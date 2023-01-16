@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Task from "./Task"
-
+import AddTask from "./AddTask"
 
 const TaskList = () => {
 
@@ -32,6 +32,7 @@ const TaskList = () => {
     ]
 
     const [task, setTask] = useState(defaultTaskList)
+    console.log(task)
 
     const deleteTask = (taskId) => {
         setTask(task.filter(item => item.id !== taskId))
@@ -41,21 +42,28 @@ const TaskList = () => {
         let newTaskList = [...task]
         let index = newTaskList.findIndex(item => item.id === taskId)
         newTaskList[index].isDone = !newTaskList[index].isDone
+        //TODO add checked task to end of array
+        // let removed = newTaskList.splice(index, 1)[0]
+        // newTaskList.push(removed)
+        // console.log(newTaskList)
         setTask(newTaskList)
     }
 
-    console.log(task)
-
-    return (<div className="TaskList">
-                {task.map((item) => (
-                    <Task 
-                        key={item.id} 
-                        data={item} 
-                        deleteTask={deleteTask}
-                        checkTask={checkTask}
-                    />
-                ))}
-            </div>)
+    return (
+        <div className="TaskList">
+            <AddTask 
+                task={task} 
+                setTask={setTask} 
+            />
+            {task.map((item) => (
+                <Task 
+                    key={item.id} 
+                    data={item} 
+                    deleteTask={deleteTask}
+                    checkTask={checkTask}
+                />
+            ))}
+        </div>)
 }
 
 export default TaskList

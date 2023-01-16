@@ -1,11 +1,11 @@
 import React from 'react';
-import { VscCalendar } from "react-icons/vsc";
+import { VscChecklist } from "react-icons/vsc";
 
 class Header extends React.Component {
     render() {
         return (
             <header>
-                <VscCalendar className='headerIcon'/>
+                <VscChecklist className='headerIcon'/>
                 <div>TODO List</div>
             </header>
         )
