@@ -2,6 +2,10 @@ import React from "react"
 import { VscClose, VscEdit, VscRemove, VscCheck } from "react-icons/vsc";
 
 const Task = ({data, deleteTask, checkTask}) => {
+
+    const creationDate = new Date(data.creationDate)
+    const expirationDate = new Date(data.expirationDate)
+
     return (
         <div className="task" style={{ textDecoration: data.isDone ? 'line-through' : 'none'}} >
             <div className="taskTitle">
@@ -24,10 +28,10 @@ const Task = ({data, deleteTask, checkTask}) => {
             </div>
             <div className="taskDateTime">
                 <span>
-                    Created: {data.creationDate}
+                    Created: {creationDate.toLocaleString()}
                 </span>
                 <span>
-                    Do before: {data.expirationDate}
+                    Do before: {expirationDate.toLocaleString()}
                 </span>
             </div>
         </div>

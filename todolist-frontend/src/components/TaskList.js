@@ -1,39 +1,27 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Task from "./Task"
 import AddTask from "./AddTask"
-import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+
+const baseUrl = 'http://localhost:8080'
 
 const TaskList = () => {
+    const [task, setTask] = useState(null)
+    const [isLoading, setLoading] = useState(true);
 
-    const defaultTaskList = [
-        {
-            id: uuidv4(),
-            title: 'task number one',
-            description: '1 Lorem ipsum dolor sit amet consectetur adipisicin',
-            creationDate: new Date('2023-01-11T16:49:01.001').toLocaleString(),
-            expirationDate: new Date('2023-02-11T16:49:01.001').toLocaleString(),
-            isDone: false
-        },
-        {
-            id: uuidv4(),
-            title: 'task number two',
-            description: '2 Lorem ipsum dolor sit amet consectetur adipisicing elit',
-            creationDate: new Date('2023-01-11T16:49:01.001').toLocaleString(),
-            expirationDate: new Date('2023-02-11T16:49:01.001').toLocaleString(),
-            isDone: false
-        },
-        {
-            id: uuidv4(),
-            title: 'task number three',
-            description: '3 Lorem ipsum dolor sit amet consectetur adipisicing elit',
-            creationDate: new Date('2023-01-11T16:49:01.001').toLocaleString(),
-            expirationDate: new Date('2023-02-11T16:49:01.001').toLocaleString(),
-            isDone: false
-        },
-    ]
+    const getTasks = () => {
+        axios.get(baseUrl+'/task')
+            .then((response) => {
+                console.log(response.data)
+                setTask(response.data)
+                setLoading(false);
+            })
+            .catch(error => console.log(error))
+    }
 
-    const [task, setTask] = useState(defaultTaskList)
-    console.log(task)
+    useEffect(() => {
+        setTask(getTasks())
+      }, []);
 
     const deleteTask = (taskId) => {
         setTask(task.filter(item => item.id !== taskId))
@@ -44,6 +32,10 @@ const TaskList = () => {
         let index = newTaskList.findIndex(item => item.id === taskId)
         newTaskList[index].isDone = !newTaskList[index].isDone
         setTask(newTaskList)
+    }
+
+    if (isLoading) {
+        return <div className="TaskList">Loading...</div>;
     }
 
     return (
