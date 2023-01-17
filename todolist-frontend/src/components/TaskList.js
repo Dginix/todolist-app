@@ -1,32 +1,33 @@
 import { useState } from "react"
 import Task from "./Task"
 import AddTask from "./AddTask"
+import { v4 as uuidv4 } from 'uuid';
 
 const TaskList = () => {
 
     const defaultTaskList = [
         {
-            id: 1,
+            id: uuidv4(),
             title: 'task number one',
             description: '1 Lorem ipsum dolor sit amet consectetur adipisicin',
-            creationDate: new Date('2023-01-11T16:49:01.001'),
-            expirationDate: new Date('2023-02-11T16:49:01.001'),
+            creationDate: new Date('2023-01-11T16:49:01.001').toLocaleString(),
+            expirationDate: new Date('2023-02-11T16:49:01.001').toLocaleString(),
             isDone: false
         },
         {
-            id: 2,
+            id: uuidv4(),
             title: 'task number two',
             description: '2 Lorem ipsum dolor sit amet consectetur adipisicing elit',
-            creationDate: new Date('2023-01-11T16:49:01.001'),
-            expirationDate: new Date('2023-02-11T16:49:01.001'),
+            creationDate: new Date('2023-01-11T16:49:01.001').toLocaleString(),
+            expirationDate: new Date('2023-02-11T16:49:01.001').toLocaleString(),
             isDone: false
         },
         {
-            id: 3,
+            id: uuidv4(),
             title: 'task number three',
             description: '3 Lorem ipsum dolor sit amet consectetur adipisicing elit',
-            creationDate: new Date('2023-01-11T16:49:01.001'),
-            expirationDate: new Date('2023-02-11T16:49:01.001'),
+            creationDate: new Date('2023-01-11T16:49:01.001').toLocaleString(),
+            expirationDate: new Date('2023-02-11T16:49:01.001').toLocaleString(),
             isDone: false
         },
     ]
@@ -42,10 +43,6 @@ const TaskList = () => {
         let newTaskList = [...task]
         let index = newTaskList.findIndex(item => item.id === taskId)
         newTaskList[index].isDone = !newTaskList[index].isDone
-        //TODO add checked task to end of array
-        // let removed = newTaskList.splice(index, 1)[0]
-        // newTaskList.push(removed)
-        // console.log(newTaskList)
         setTask(newTaskList)
     }
 

@@ -7,19 +7,24 @@ const AddTask = ({task, setTask}) => {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const [expirationDate, setExpirationDate] = useState('')
+
     const [newTask, setNewTask] = useState({})
+
     const [errorText, setErrorText] = useState('');
 
     const clickHandler = event => {
         event.preventDefault();
 
-        if(title === '' || description === '') {
+        if(title === '' || description === '' || expirationDate === '') {
             setErrorText("fileds cannot be empty")
         }
         else {
             setTask([...task, newTask])
             event.target.reset();
-            setErrorText('')    
+            setErrorText('')
+            setTitle('')
+            setDescription('')    
         }
 
     }
@@ -30,19 +35,21 @@ const AddTask = ({task, setTask}) => {
                 id: uuidv4(), 
                 title: title, 
                 description: description,
-                creationDate: new Date().toISOString()
+                creationDate: new Date().toLocaleString(),
+                expirationDate: new Date(expirationDate).toLocaleString(),
             })
         } else {
           isMounted.current = true;
         }
-      }, [title, description]);
+      }, [title, description, expirationDate]);
     
     return(
         <div className="addTask">
             <form className="addTaskForm" onSubmit={clickHandler}>
-                <input type='text' placeholder="Title" onChange = { (e)=>setTitle(e.target.value) }/>
-                <input type='text' placeholder="Descriptrion" onChange = { (e)=>setDescription(e.target.value) }/>
-                <span className="errorTextField">{errorText}</span>
+                <input type='text' placeholder="Title" onChange = { (e)=>setTitle(e.target.value) } />
+                <input type='text' placeholder="Descriptrion" onChange = { (e)=>setDescription(e.target.value) } />
+                <input type="datetime-local" onChange = { (e)=>setExpirationDate(e.target.value) } />
+                {errorText !== '' && <span className="errorTextField">{errorText}</span> }
                 <button type="submit">
                     <TfiWrite/>
                     Add task
