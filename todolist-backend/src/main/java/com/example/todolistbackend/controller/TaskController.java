@@ -4,8 +4,12 @@ import com.example.todolistbackend.model.Task;
 import com.example.todolistbackend.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -24,5 +28,26 @@ public class TaskController {
     @GetMapping
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable(name = "id") Long id) {
+        if (taskService.deleteTask(id)) {
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        }
+        else {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<Task> addTask(@RequestBody Task task) {
+        Task savedTask = taskService.addTask(task);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedTask.getId()).toUri();
+
+        return ResponseEntity.created(location).body(savedTask);
     }
 }
