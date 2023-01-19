@@ -5,12 +5,6 @@ import axios from 'axios';
 
 const baseUrl = 'http://localhost:8080'
 
-const config = {
-    headers: {
-        'Content-Type': 'application/json',
-    },
-}
-
 const TaskList = () => {
     const [task, setTask] = useState(null)
     const [isLoading, setLoading] = useState(true);
@@ -31,7 +25,7 @@ const TaskList = () => {
     const deleteTask = (taskId) => {
         setTask(task.filter(item => item.id !== taskId))
 
-        axios.delete(baseUrl + '/task/' + taskId, config)
+        axios.delete(baseUrl + '/task/' + taskId)
             .then((response) => {
                 console.log(response.status)
             })
