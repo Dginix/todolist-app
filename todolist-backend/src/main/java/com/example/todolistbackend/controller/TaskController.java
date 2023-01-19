@@ -13,7 +13,6 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/task")
 @Slf4j
 public class TaskController {
@@ -34,10 +33,10 @@ public class TaskController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable(name = "id") Long id) {
         if (taskService.deleteTask(id)) {
-            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         else {
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
