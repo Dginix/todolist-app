@@ -27,6 +27,7 @@ public class TaskController {
 
     @GetMapping
     public List<Task> getAllTasks() {
+        log.debug("Getting all task");
         return taskService.getAllTasks();
     }
 
@@ -42,6 +43,7 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<Task> addTask(@RequestBody Task task) {
+        log.debug("New task:" + task.toString());
         Task savedTask = taskService.addTask(task);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

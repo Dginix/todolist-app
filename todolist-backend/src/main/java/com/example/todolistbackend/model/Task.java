@@ -3,6 +3,7 @@ package com.example.todolistbackend.model;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -26,9 +27,11 @@ public class Task {
     private String description;
 
     @Column(name = "creation_date")
+    @JsonFormat(pattern = "dd.MM.yyyy, HH:mm:ss")
     private LocalDateTime creationDate;
 
     @Column(name = "expiration_date")
+    @JsonFormat(pattern = "dd.MM.yyyy, HH:mm:ss")
     private LocalDateTime expirationDate;
 
     @Column(name = "is_done")

@@ -5,14 +5,19 @@ import axios from 'axios';
 
 const baseUrl = 'http://localhost:8080'
 
+const config = {
+    headers: {
+        'Content-Type': 'application/json',
+    },
+}
+
 const TaskList = () => {
     const [task, setTask] = useState(null)
     const [isLoading, setLoading] = useState(true);
 
     const getTasks = () => {
-        axios.get(baseUrl+'/task')
+        axios.get(baseUrl + '/task')
             .then((response) => {
-                console.log(response.data)
                 setTask(response.data)
                 setLoading(false);
             })
@@ -25,6 +30,12 @@ const TaskList = () => {
 
     const deleteTask = (taskId) => {
         setTask(task.filter(item => item.id !== taskId))
+
+        axios.delete(baseUrl + '/task/' + taskId, config)
+            .then((response) => {
+                console.log(response.status)
+            })
+            .catch(error => console.log(error.response.status))
     }
 
     const checkTask = (taskId) => {
@@ -33,6 +44,8 @@ const TaskList = () => {
         newTaskList[index].isDone = !newTaskList[index].isDone
         setTask(newTaskList)
     }
+
+    console.log(task)
 
     if (isLoading) {
         return <div className="TaskList">Loading...</div>;

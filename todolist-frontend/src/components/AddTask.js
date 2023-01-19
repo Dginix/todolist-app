@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect} from "react";
 import { TfiWrite } from "react-icons/tfi";
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+
+const baseUrl = 'http://localhost:8080'
 
 const AddTask = ({task, setTask}) => {
     const isMounted = useRef(false);
@@ -25,6 +28,20 @@ const AddTask = ({task, setTask}) => {
             setErrorText('')
             setTitle('')
             setDescription('')    
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+
+            axios.post(baseUrl + '/task', newTask)
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         }
 
     }
@@ -32,7 +49,6 @@ const AddTask = ({task, setTask}) => {
     useEffect(() => {   
         if (isMounted.current) {
             setNewTask({
-                id: uuidv4(), 
                 title: title, 
                 description: description,
                 creationDate: new Date().toLocaleString(),
